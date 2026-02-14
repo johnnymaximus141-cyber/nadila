@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Georgia", cursive;
+      text-align: center;
+      overflow-x: hidden;
+
+      /* COQUETTE BACKGROUND (UNCHANGED) */
+      background: url("https://i.pinimg.com/736x/40/36/37/403637d07305865fa283ce16d0b06d02.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #ff4f87;
+    }
+
+    /* LACE FRAME */
+    .frame {
+      margin: 40px auto;
+      padding: 50px 20px;
+      max-width: 700px;
+
+      background: rgba(255, 255, 255, 0.75);
+      border: 6px solid pink;
+      border-radius: 35px;
+
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.8);
+      position: relative;
+    }
+
+    /* Ribbon (UNCHANGED SIZE) */
+    .ribbon {
+      width: 100px;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 3rem;
+      font-family: "Brush Script MT", cursive;
+      text-shadow: 2px 2px white;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #ff7fa5;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 15px 40px;
+      font-size: 1.3rem;
+
+      border: 3px solid pink;
+      border-radius: 30px;
+
+      background: white;
+      color: #ff4f87;
+
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 192, 203, 0.7);
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      background: #ffe6f0;
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 1.6rem;
+
+      background: rgba(255, 255, 255, 0.85);
+      padding: 25px;
+
+      border-radius: 25px;
+      border: 3px dashed pink;
+
+      display: inline-block;
+      max-width: 500px;
+
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+    }
+
+    /* Falling hearts animation */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear forwards;
+      color: pink;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Love Letter Section */
+    .letter {
+      margin-top: 50px;
+      padding: 30px;
+      border-radius: 25px;
+      background: rgba(255, 240, 246, 0.85);
+      border: 3px solid pink;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+    }
+
+    .letter h2 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .letter p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ff4f87;
+    }
+
+    /* Photo Gallery Section */
+    .gallery {
+      margin-top: 60px;
+      padding: 30px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 3px dashed pink;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+    }
+
+    .gallery h2 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .photos {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .photos img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid pink;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.7);
+      transition: 0.2s;
+    }
+
+    .photos img:hover {
+      transform: scale(1.08);
+    }
+
+    /* Quiz Section */
+    .quiz {
+      margin-top: 60px;
+      padding: 30px;
+      border-radius: 25px;
+      background: rgba(255, 240, 246, 0.9);
+      border: 3px solid pink;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+    }
+
+    .quiz h2 {
+      font-family: "Brush Script MT", cursive;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .choices button {
+      font-size: 1.1rem;
+      padding: 12px;
+      border-radius: 20px;
+      border: 2px solid pink;
+      background: white;
+      color: #ff4f87;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .choices button:hover {
+      background: #ffe6f0;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ff4f87;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="frame">
+    <!-- Ribbon -->
+    <img class="ribbon"
+      src="https://png.pngtree.com/png-vector/20230912/ourmid/pngtree-sweet-pink-ribbon-png-image_10023384.png"
+      alt="ribbon">
+
+    <h1>Nadilhuhihouhihoooo 💕</h1>
+    <p>Tebak siapa yang punya pesan buat kamu? 😌</p>
+
+    <button onclick="generateMessage()">Wujudkan 💌</button>
+
+    <div id="message">...</div>
+
+    <!-- Long Paragraph Section -->
+    <div class="letter">
+      <h2>💌 A Letter For You</h2>
+      <p>
+        Aku tau aku sendiri yang bilang kita sebaiknya ga terlalu mengagung-agungkan hari valentine, tapi mungkin aku bisa membenarkan ini bahwa yang aku agungkan kan bukan harinya, tapi kamu YEAYYY
+	<p>
+	Aku liat story kamu tepat satu tahun lalu, dimana kamu dapet bunga sangat cantik dan kamu bilang kamu suka banget valentine di 28. Aku mau kamu merasakan perasaan itu lagi, tapi kali ini lebih nyata walaupun kita ga bertemu secara nyata. Aku disini mau minta maaf dulu karena aku belum ngasih kamu apa-apa karena aku masih sakittt. Sumpah sayang aku punya ide banyak banget tapi aku belum bisa realisasikan karena keterbatasan health dan bisnis, maaff yaaa
+	<p>
+	BUT FEAR NOT, karena seharusnya minggu depan bisa ada beberapa waktu luang yang bisa kita manfaatkan. CLUE nya ada di salah satu message generator **emoji mata melirik** hehe
+	<p>
+	By the way, iya, aku kangen kamu, BANGET. As a result I resort to finding every media I could of you. And I can say, you are such a fine young lady before I came into your life. I hope, oh God I really hope I can bring values which no one has ever managed to brought to your life before. Ya, aku mungkin punya gengsi atau ego, tapi aku bener-bener pengen banget kamu bilang "Yeah, Faiz is my favourite boy ever and no one has ever come close!" Tentu saja aku harus layak untuk MENDAPATKAN itu, ga cuma nerima aja
+	<p>
+	Dan untuk itu, please my love, forgive me for all the wrongs that I did. Please believe me when I say that I want to learn how to love you better. I said it before and I'll say it again, you are worth the fight, you are worth the time, you are living gold.  
+	<p>
+	Aku sayang kamu.
+      </p>
+    </div>
+
+    <!-- Photo Gallery Section -->
+    <div class="gallery">
+      <h2>📸 Aku Kamu atau Lu Gua?</h2>
+
+      <div class="photos">
+        <img src="nad1.jpg">
+        <img src="nad2.jpg">
+        <img src="nad3.jpg">
+      </div>
+
+      <p style="font-size: 1rem; color: #ff7fa5;">
+        Cantik tuh cewenya 💖
+      </p>
+    </div>
+
+    <!-- Quiz Game Section (3 QUESTIONS) -->
+    <div class="quiz">
+      <h2>🎀 Mini Love Quiz</h2>
+
+      <p>1. Siapa orang paling lucu di dunia?</p>
+      <div class="choices">
+        <button onclick="checkAnswer('q1', false)">Jimmy McGill Dewa Komedi</button>
+        <button onclick="checkAnswer('q1', true)">mildepths</button>
+        <button onclick="checkAnswer('q1', false)">Saul Goodman</button>
+      </div>
+      <div class="result" id="q1">...</div>
+
+      <hr style="margin: 30px; border: 1px dashed pink;">
+
+      <p>2. Kalau pikiran kamu lagi berat, kamu harus?</p>
+      <div class="choices">
+        <button onclick="checkAnswer('q2', true)">Unload ke Faiz</button>
+        <button onclick="checkAnswer('q2', false)">Lumurin minyak ke jalan</button>
+        <button onclick="checkAnswer('q2', false)">AWAS ADA PESAWAT JATOH</button>
+      </div>
+      <div class="result" id="q2">...</div>
+
+      <hr style="margin: 30px; border: 1px dashed pink;">
+
+      <p>3. What do I love about you?</p>
+      <div class="choices">
+        <button onclick="checkAnswer('q3', false)">Your mind</button>
+        <button onclick="checkAnswer('q3', false)">Your body</button>
+        <button onclick="checkAnswer('q3', true)">(trick question, all of you I love)</button>
+      </div>
+      <div class="result" id="q3">...</div>
+    </div>
+
+  </div>
+
+  <script>
+    /* Sweet Messages Generator */
+    const messages = [
+      "Thank you for making everything easier for me 🫶",
+      "Iya, aku kangen 🌙",
+      "Guilty as Sin?",
+      "Cinnabon date with me?",
+      "Tell me I'm your number 1 man",
+      "Peluk aku selama 3 jam🤍",
+      "Jangan diculik alien plis 💕"
+    ];
+
+    function generateMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").innerText =
+        messages[randomIndex];
+    }
+
+    /* Falling Hearts Effect */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💗";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 700);
+
+    /* Quiz Answer Checker */
+    function checkAnswer(questionId, isCorrect) {
+      const result = document.getElementById(questionId);
+
+      if (isCorrect) {
+        result.innerText = "BENAR 💖 Kamu emang aku!";
+      } else {
+        result.innerText = "SALAH 😤 Coba lagi sayang!";
+      }
+    }
+  </script>
+
+</body>
+</html>
